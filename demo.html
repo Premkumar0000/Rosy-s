@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <style>
+    .subharao{
+     }
+    .banana-container {
+        display: none;
+        position: relative;
+        overflow: hidden;
+        margin-right: 3%;
+        margin-left: 3%;
+    }
+
+    .apple-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .orange-card {
+        min-width: 100%;
+        box-sizing: border-box;
+        /* border: 1px solid black; */
+        height: 20vh;
+        background-color: white;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    .orange-card img {
+        object-fit: cover;
+        display: block;
+        /* margin-top: 12%; */
+    }
+
+    .grape-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color:#002A54;
+        border: none;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+    }
+
+    .left {
+        left: 10px;
+    }
+
+    .right {
+        right: 10px;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .banana-container {
+            display: block;
+        }
+
+        /* Mobile - 1 card */
+        .apple-track {
+            transform: translateX(0);
+        }
+
+        .orange-card {
+            min-width: 100%;
+            height: 30vh;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .subharao{
+            display: none;
+        }
+        .banana-container {
+            display: block;
+        }
+
+        /* Tablet - 2 cards */
+        .orange-card {
+            min-width: 50%;
+        }
+        #win,#war{
+            font-size:small;
+        }
+        #menuIcon{
+            font-size:2em;
+        }
+        
+    }</style>
+    <div class="subharao">
+        <div class="banana-container">
+            <button class="grape-button left" id="prevGrape">&#10094;</button>
+            <div class="banana">
+                <div class="apple-track" id="appleTrack">
+                   <div class="orange-card"><center><img src="./images/carosel.PNG" alt="" srcset=""></center></div>
+                    <div class="orange-card"><center><img src="./images/carosel.PNG" alt="" srcset=""></center></div>
+                </div>
+            </div>
+            <button class="grape-button right" id="nextGrape">&#10095;</button>
+        </div>
+        </div>
+        <script> const track = document.getElementById('appleTrack');
+            const prevBtn = document.getElementById('prevGrape');
+            const nextBtn = document.getElementById('nextGrape');
+            let index = 0;
+        
+            const moveCarousel = (direction) => {
+                const trackWidth = track.offsetWidth;
+                const totalCards = track.children.length;
+                const cardWidth = track.children[0].offsetWidth;
+                const maxIndex = totalCards - Math.floor(trackWidth / cardWidth);
+        
+                if (direction === 'next') {
+                    index = (index + 1 > maxIndex) ? 0 : index + 1;
+                } else {
+                    index = (index - 1 < 0) ? maxIndex : index - 1;
+                }
+        
+                track.style.transform = `translateX(-${index * cardWidth}px)`;
+            };
+        
+            prevBtn.addEventListener('click', () => moveCarousel('prev'));
+            nextBtn.addEventListener('click', () => moveCarousel('next'));</script>
+</body>
+</html>
